@@ -1,0 +1,33 @@
+version: '3.1'
+
+services:
+
+  dhcp-server:
+    build: ./dhcp-server
+    networks:
+      internal-mgmt:
+        ipv4_address: 192.168.15.50
+    restart: always
+    volumes:
+      - ./dhcp-server/etc/dhcp/dhcpd.conf:/etc/dhcp/dhcpd.conf
+      - ./dhcp-server/var/lib/dhcp:/var/lib/dhcp
+
+  web-server:
+    build: ./web-server
+    networks:
+      internal-mgmt:
+        ipv4_address: 192.168.15.51
+    restart: always
+    privileged: true
+    volumes:
+      - ./web-server/files:/usr/src/app/files
+
+networks:
+
+  internal-mgmt:
+    driver: macvlan
+    driver_opts:
+      parent: br0 # ensure this is the interface looks into the internal-mgmt network
+    ipam:
+      config:
+        - subnet: 192.168.0.0/24
