@@ -48,7 +48,7 @@ services:
       # - ./msmtp/aliases:/etc/aliases:ro
     networks:
       internal-mgmt:
-        ipv4_address: 192.168.0.113
+        ipv4_address: 192.168.10.113
   graphite:
     image: graphiteapp/graphite-statsd:latest
     container_name: graphite
@@ -75,4 +75,4 @@ networks:
       parent: br0 # ensure this is the interface looks into the internal-mgmt network
     ipam:
       config:
-        - subnet: 192.168.0.0/24
+        - subnet: 192.168.10.0/24
