@@ -26,6 +26,7 @@ services:
       #- ICINGA2_USER_FULLNAME=Icinga2 Docker Monitoring Instance
       - DEFAULT_MYSQL_HOST=mysql
     volumes:
+      - ./mibs:/usr/share/snmp/mibs/
       - ./data/icinga/cache:/var/cache/icinga2
       - ./data/icinga/certs:/etc/apache2/ssl
       - ./data/icinga/etc/icinga2:/etc/icinga2
